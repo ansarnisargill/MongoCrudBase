@@ -1,0 +1,79 @@
+<%- include("header") -%>
+
+    <div class="sidebar">
+        <h1 style="color: black;display: inline-block; vertical-align: middle;"> Add Bug </h1>
+        <div class="box">
+            <form action="/bug" method="post">
+
+                <div class="container">
+                    <label for="title"><b>Title</b></label>
+                    <input type="text" placeholder="Enter Title" name="title" required>
+                    <label for="description"><b>Description</b></label>
+                    <input type="text" placeholder="Enter Description" name="description" required>
+                    <label for="assignee"><b>Assignee</b></label>
+                    <input type="text" placeholder="Enter Assignee" name="assignee" required>
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <div class="box" id="heading">
+                <h1> List Of Bugs</h1>
+            </div>
+            <div>
+                <table id="bugs" class="hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Assignee</th>
+                            <th>Description</th>
+                            <th>Completion Date</th>
+                            <th>Completion Time</th>
+                            <th>Remaining</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% bugs.forEach(function(b){ %>
+                            <% if (b.datePassed) { %>
+                                <tr class="passedrow">
+                                    <%} else { %>
+                                <tr>
+                                    <% } %>
+
+                                        <td>
+                                            <%=b.title%>
+                                        </td>
+                                        <td>
+                                            <%=b.assignee%>
+                                        </td>
+                                        <td>
+                                            <%=b.description%>
+                                        </td>
+                                        <td>
+                                            <%= b.completionDate%>
+                                        </td>
+                                        <td>
+                                            <%= b.completionTime%>
+                                        </td>
+                                        <td>
+                                            <%= b.remaining%>
+                                        </td>
+                                </tr>
+
+
+
+
+                                <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#bugs').DataTable();
+        });
+    </script>
+    <%- include("footer") -%>
