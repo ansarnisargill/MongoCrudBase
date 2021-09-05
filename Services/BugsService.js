@@ -1,4 +1,4 @@
-const Bug = require('../Config/Models/Bug');
+const Bug = require('../Models/Bug');
 async function SaveBug(title, description, assignee) {
     let obj = new Bug({
         title: title,
